@@ -7,10 +7,22 @@
  */
 function filterStudentsByGrade(students, grade) {
   // Виведемо в консоль критичну помилку з текстом "Якщо ви бачите це повідомлення, то завдання 1 виконано не правильно"
+  console.error(
+    "Якщо ви бачите це повідомлення, то завдання 1 виконано не правильно"
+  );
   // Очищення консолі перед виведенням
+  console.clear();
   // Виведемо в консоль повідомлення для відстеження роботи програми з текстом: "Завдання: 1 =============================="
+  console.log("Завдання: 1 ==============================");
   // Відфільтруємо тільки тих студентів оцінка яких співпадає з grade
+  const filteredStudents = students.filter(
+    (student) => student.grade === grade
+  );
+
   // За допомогою перебору масиву виведемо повідомлення для відстеження роботи програми з іменем кожного студента, який має необхідну оцінку
+  filteredStudents.forEach((student) => {
+    console.log(student);
+  });
 }
 
 // Виклик функції для фільтрації студентів з рівнем "A"
@@ -32,6 +44,13 @@ filterStudentsByGrade(
  *  arr - Масив для обробки.
  */
 function logArrayElements(arr) {
+  if (!Array.isArray(arr)) {
+    console.error("Аргумент має бути масивом!");
+    return null;
+  }
+  for (let i = 0; i < arr.length; i++) {
+    console.log(`Елемент${i}:${arr[i]}`);
+  }
   // Перевіряємо, чи arr є масивом.
   // Якщо arr не є масивом, виведеме в консоль критичну помилоку з текстом "Аргумент має бути масивом!"
   // Повертаємо null, що свідчить про неможливість обробки вхідних даних.
@@ -58,6 +77,17 @@ logArrayElements([1, 2, 3, "a", "b", "c"]);
  *  maxLength - Максимальна довжина масиву.
  */
 function warnAboutMaxArrayLength(arr, maxLength) {
+  if (!Array.isArray(arr) || maxLength !== "number") {
+    console.error(
+      "Перший аргумент має бути масивом, другий аргумент має бути числом!"
+    );
+    return null;
+  }
+  if (arr.length > maxLength) {
+    console.warn("Увага! Довжина масиву перевищує максимально допустиму!");
+  } else {
+    console.info("Довжина масиву не перевищує максимально допустиму.");
+  }
   // Перевіряємо, чи arr є масивом, а maxLength є числом.
   // Якщо arr не є масивом або maxLength не є числом, виведеме в консоль критичну помилоку з текстом: "Перший аргумент має бути масивом, другий аргумент має бути числом!".
   // Повертаємо null, що свідчить про неможливість обробки вхідних даних.
@@ -80,6 +110,10 @@ warnAboutMaxArrayLength([1, 2, 3, 4, 5], 3);
  *  arr2 - Другий масив чисел.
  */
 function compareArrays(arr1, arr2) {
+  const jsonArr1 = JSON.stringify(arr1);
+  const jsonArr2 = JSON.stringify(arr2);
+  console.assert(jsonArr1 === jsonArr2, "Масиви не однакові");
+
   // Сортуємо масиви за зростанням.
   // Оскільки напряму порівняти масиви за допомогою оператора === не можно, перетворимо ії в json і порівняємо
   // Використовуємо `console.assert()`, щоб вивести помилку, якщо масиви не однакові.
@@ -98,6 +132,20 @@ compareArrays([1, 2, 3, 4, 5], [1, 2, 3, 4]);
  *  Повернеться згенерована матриця.
  */
 function buildMatrix(size) {
+  if (size === "number") {
+    console.error("Аргумент має бути числом!");
+    return null;
+  }
+  let emptyArr = [];
+  for (let i = 0; i < size; i++) {
+    let emptyMatrix = [];
+    for (let j = 0; j < size; j++) {
+      const randomNumber = Math.floor(Math.random() * 10);
+      emptyMatrix.push(randomNumber);
+    }
+    emptyArr.push(emptyMatrix);
+  }
+  console.table(emptyArr);
   // Перевіряємо, чи size є числом.
   // Якщо size не є числом, виведеме в консоль критичну помилку з текстом "Аргумент має бути числом!".
   // Повертаємо null, що свідчить про неможливість обробки вхідних даних.
